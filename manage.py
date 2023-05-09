@@ -29,4 +29,5 @@ async def app_shutdown():
     print("On App Shutdown i will be called.")
 
 
-#uvicorn.run("manage:app", host=settings.HOST, port=settings.PORT, log_level=settings.LOG_LEVEL, use_colors=True,reload=True)
+if __name__ == "__main__":
+    uvicorn.run("manage:app", host=settings.HOST, port=settings.PORT, log_level=settings.LOG_LEVEL, use_colors=True,reload=False)

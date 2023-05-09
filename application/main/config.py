@@ -51,7 +51,7 @@ class GlobalConfig(BaseSettings):
     API_DESCRIPTION: Optional[str] = Field(None, env="API_DESCRIPTION")
     API_VERSION: Optional[str] = Field(None, env="API_VERSION")
     API_DEBUG_MODE: Optional[bool] = Field(None, env="API_DEBUG_MODE")
-
+    API_LOG_LEVEL: Optional[str] = Field(None, env="API_LOG_LEVEL")
     # define global variables with the Field class
     ENV_STATE: Optional[str] = Field(None, env="ENV_STATE")
 
@@ -61,7 +61,6 @@ class GlobalConfig(BaseSettings):
     # environment specific variables do not need the Field class
     HOST: Optional[str] = None
     PORT: Optional[int] = None
-    LOG_LEVEL: Optional[str] = None
 
     DB: Optional[str] = None
 
