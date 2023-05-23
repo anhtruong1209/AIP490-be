@@ -31,7 +31,7 @@ class BodyBackground(object):
         # create MODNet and load the pre-trained ckpt
         self.modnet = MODNet(backbone_pretrained=False)
         self.modnet = nn.DataParallel(self.modnet)
-        self.parameter_load(settings.BODY_BACKGROUND_MODEL.CHECK_POINT)
+        self.parameter_load('pretrained/modnet_photographic_portrait_matting.ckpt')
         print("Body background built")
         
     def parameter_load(self, ckpt_path):

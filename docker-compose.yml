@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  redis:
+    image: "redis:6.0"
+    ports:
+      - "6379:6379"
+
+  fastapi:
+    build: .
+    ports:
+      - "8000:8000"
+
+  worker:
+    build: ./celery_app/
+    depends_on:
+      - redis
+
+  flower:
+    image: "mher/flower:0.9.7"
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    command:
+      - "--broker=redis://redis:6379/0"
