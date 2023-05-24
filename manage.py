@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/env python
 """Fastapi celery example."""
 import uvicorn
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
 from initializer import IncludeAPIRouter
 from fastapi.staticfiles import StaticFiles
-from config import settings
 app = FastAPI()
 
 def get_application():
@@ -19,7 +16,7 @@ def get_application():
     _app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
-        allow_credentials=False,
+        allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
@@ -30,7 +27,7 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 if __name__ == "__main__":
     uvicorn.run("manage:app",
-                host='127.0.0.1', 
+                host='0.0.0.0', 
                 port=8000, 
                 use_colors=True,
                 reload=True)

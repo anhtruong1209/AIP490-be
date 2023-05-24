@@ -1,8 +1,8 @@
 import json
 from fastapi import Request
 from common.format_image import FormatImage
-def convert_multis_image(request: Request):
-    body = request.body()
+async def convert_multis_image(request: Request):
+    body = await request.body()
     try:
         body = json.loads(body)
     except:
@@ -10,7 +10,7 @@ def convert_multis_image(request: Request):
             
         }
         pass
-    form =  request.form()
+    form =  await request.form()
     request_form = {key: value for key,value in form.items()}
     request_query_params = {item[0]: item[1] for item in request.query_params.multi_items()}
 
