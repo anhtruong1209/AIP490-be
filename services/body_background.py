@@ -14,6 +14,8 @@ import torchvision.transforms as transforms
 from config import settings
 from PIL import Image
 from services.bodybackground.modnet import MODNet
+from common.monitor import timer_decorator
+
 warnings.filterwarnings("ignore")
 
 class BodyBackground(object):
@@ -106,6 +108,8 @@ class BodyBackground(object):
         im_b64 = base64.b64encode(im_bytes)
         return im_b64
 
+
+    @timer_decorator
     def inference(self, img, bg_path):
         
         im_b64= self.image(img, background=True,backgound_path= bg_path, save=False)
