@@ -11,7 +11,6 @@ from models.request import convert_single_image, convert_multis_image
 from common.read_image import Utils
 import traceback, cv2, base64
 import numpy as np
-from rembg import remove
 from fastapi import File, UploadFile, Form
 router = APIRouter()
 # bd = BodyDetection()
