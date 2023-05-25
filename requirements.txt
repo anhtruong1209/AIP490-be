@@ -1,3 +1,4 @@
+numpy==1.24.3
 anyascii==0.3.2
 anyio==3.6.2
 blis==0.7.9
@@ -17,8 +18,6 @@ fastapi==0.95.2
 h11==0.14.0
 idna==3.4
 Jinja2==3.1.2
-jmespath==1.0.1
-numpy==1.24.3
 opencv-python==4.7.0.72
 packaging==23.1
 pandas==2.0.1
