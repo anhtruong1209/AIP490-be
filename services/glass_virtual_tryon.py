@@ -1,29 +1,33 @@
 import cv2
 import numpy as np
 import base64
+from common.monitor import timer_decorator
+
 class GlassFace(object):
     def __init__(self):
         # Load model
         self.face_detection_model = cv2.CascadeClassifier("pretrained/haarcascade_frontalface_alt.xml")
         self.eye_detection_model = cv2.CascadeClassifier("pretrained/haarcascade_eye.xml")
-        
+         
         print("GlassFace Model Load Done")
+        
+    @timer_decorator
     def process_image(self, human_image, glass_image):
         final_image = human_image
         # 1. Phát hiện khuôn mặt
         gray_image = cv2.cvtColor(human_image, cv2.COLOR_BGR2GRAY)
 
         faces = self.face_detection_model.detectMultiScale(gray_image, scaleFactor=1.3, minNeighbors=5, minSize=(200,200))
-        
+        print(faces)
         if len(faces) > 0:
             for (face_x, face_y, face_w, face_h) in faces:
 
                 # 2. Phát hiện mắt
                 eye_centers = []
                 face_roi = gray_image[face_y: face_y + face_h, face_x : face_x + face_w]
-
+                print(face_roi)
                 eyes = self.eye_detection_model.detectMultiScale(face_roi, scaleFactor=1.1, minNeighbors=5, minSize=(100,100))
-
+                print(eyes)
                 # Lấy tâm của 2 mắt
                 for (eye_x, eye_y, eye_w, eye_h) in eyes:
                     eye_centers.append((face_x + int(eye_x + eye_w/2), face_y + int(eye_y + eye_h/2)))
