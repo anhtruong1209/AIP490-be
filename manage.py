@@ -23,7 +23,6 @@ def get_application():
     return _app
 
 app = get_application()
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 if __name__ == "__main__":
     uvicorn.run("manage:app",
