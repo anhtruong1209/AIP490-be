@@ -65,16 +65,16 @@ def test(opt, net):
 
 def main():
     
-    import gdown
+    # import gdown
 
-    url = 'https://drive.google.com/file/d/1N_guN04Kxg4cFN6qHSu5YYIp52n82zOD/view?usp=sharing'
-    output = 'checkpoints/ckpt_viton.pt'
-    gdown.download(url, output, quiet=False)
+    # url = 'https://drive.google.com/file/d/1N_guN04Kxg4cFN6qHSu5YYIp52n82zOD/view?usp=sharing'
+    # output = 'checkpoints/ckpt_viton.pt'
+    # gdown.download(url, output, quiet=False)
     
     opt = get_opt()
     if not os.path.exists(os.path.join(opt.save_dir, opt.name, "vis_viton_out")):
         os.makedirs(os.path.join(opt.save_dir, opt.name,"vis_viton_out"))
-    sdafnet = SDAFNet_Tryon(ref_in_channel=opt.multi_flows)
+    sdafnet = SDAFNet_Tryon(ref_in_channel=6)
     sdafnet.load_state_dict(torch.load("checkpoints/ckpt_viton.pt", map_location='cpu'))
     sdafnet.eval()
     
