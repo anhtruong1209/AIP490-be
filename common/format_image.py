@@ -9,11 +9,12 @@ class FileType(Enum):
     URL = 'url'
 
 class FormatImage(object):
-    def __init__(self, image_url, image_file, image_base64):
+    def __init__(self, image_url, image_file, image_base64, image_name):
         self.image_url = image_url
         self.image_file = image_file
         self.image_base64 = image_base64
-    
+        self.image_name = image_name
+        
     def isFileFormatCorrect(self):
         return self.image_url or self.image_file or self.image_base64
     @staticmethod

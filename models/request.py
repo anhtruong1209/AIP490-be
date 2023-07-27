@@ -22,7 +22,7 @@ async def convert_multis_image(request: Request):
         image_base64_1 = body['image_base64_1']
     else:
         image_base64_1 = None
-
+        
     if "image_url1" in request_form: 
         image_url1 = request_form['image_url1']
     elif "image_url1" in request_query_params:
@@ -49,7 +49,7 @@ async def convert_multis_image(request: Request):
         image_url2 = body['image_url2']
     else:
         image_url2 = None
-
+        
     if "image_file1" in request_form: 
         image_file1 = request_form['image_file1']
     else:
@@ -59,14 +59,36 @@ async def convert_multis_image(request: Request):
     else:
         image_file2 = None
     
+    if "image_name1" in request_form: 
+        image_name1 = request_form['image_name1']
+    elif "image_name1" in request_query_params:
+        image_name1 = request_query_params['image_name1']
+    elif "image_name1" in body:
+        image_name1 = body['image_name1']
+    else:
+        image_name1 = None
+    
+    
+    if "image_name2" in request_form: 
+        image_name2 = request_form['image_name2']
+    elif "image_name2" in request_query_params:
+        image_name2 = request_query_params['image_name2']
+    elif "image_name2" in body:
+        image_name2 = body['image_name2']
+    else:
+        image_name2 = None
 
-    image1  =  FormatImage(image_file=image_file1,image_base64=image_base64_1,image_url=image_url1)  
-    image2  =  FormatImage(image_file=image_file2,image_base64=image_base64_2,image_url=image_url2)
-
+    image1  =  FormatImage(image_file=image_file1,image_base64=image_base64_1,image_url=image_url1,image_name=image_name1)  
+    image2  =  FormatImage(image_file=image_file2,image_base64=image_base64_2,image_url=image_url2,image_name=image_name2)
     image_read1 = image1.get_byte_file()
     image_read2 = image2.get_byte_file()
     
-    return {"image1": image_read1, "image2": image_read2}
+    return {
+                "image1": image_read1, 
+                "image2": image_read2, 
+                "image_name1": image1.image_name,
+                "image_name2": image2.image_name,
+           }
 
 async def convert_single_image(request: Request):
     body = await request.body()
