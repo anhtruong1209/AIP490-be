@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+pretrained/
 tests/
 tests/DAFlow/checkpoints
 tests/DAFlow/data/VITON
