@@ -1,12 +1,10 @@
 from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from fastapi import Depends
-from services.body_background import BodyBackground
 from fastapi.encoders import jsonable_encoder
-from models.respone import ResponeModel , HumanbodyRectangle, Body
+from models.respone import ResponeModel
 from models.error import ErrorModel
 from models.request import convert_multis_image
-import traceback
 from PIL import Image
 from io import BytesIO
 from services.clothesviton.reference import TryonService
@@ -14,7 +12,7 @@ tryon_service = TryonService()
 router = APIRouter()
 
 # VITON CLOTHES
-@router.post("/viton_clothes")    
+@router.post("/viton_clothes")   
 def body_background(image: dict = Depends(convert_multis_image)):
     image_byte1 = image['image1']
     image_byte2 = image['image2']
@@ -31,10 +29,10 @@ def body_background(image: dict = Depends(convert_multis_image)):
     image_name2 = image["image_name2"]
     img_path1 = 'services/clothesviton/data/VITON/VITON_test/test_img/' + image_name1
     image1.save(img_path1)
-    print("Image saved 1")
+    print(f'Image saved 1 {img_path1} with name {image_name1}')
     img_path2 = 'services/clothesviton/data/VITON/VITON_test/clothes/' + image_name2
     image2.save(img_path2)
-    print("Image saved 2")
+    print(f'Image saved 2 {img_path2} with name {image_name2}')
     
     a =  tryon_service.reference([image_name1],[image_name2])
     return ResponeModel(image=a)

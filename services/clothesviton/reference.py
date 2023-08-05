@@ -8,6 +8,7 @@ import numpy as np
 from PIL import Image
 from services.clothesviton.datasets import VITONDataset
 from services.clothesviton.models.sdafnet import SDAFNet_Tryon
+from utility.monitor.time import time_it
 from torch.utils import data
 from torchvision.utils import save_image
 import base64
@@ -31,7 +32,7 @@ class TryonService:
         img_base64 = ""
         test_dataset = VITONDataset(img_name, c_name)
         test_loader = data.DataLoader(
-            test_dataset, batch_size=4, shuffle=True, num_workers=4
+            test_dataset, batch_size=2, shuffle=False, num_workers=1
         )
         for i, inputs in enumerate(tqdm(test_loader)):
             img_names = inputs["img_name"]
@@ -65,7 +66,8 @@ class TryonService:
                     my_string = base64.b64encode(img_file.read())
         img_base64 = my_string.decode("utf-8")
         return img_base64
-
+    
+    @time_it
     def reference(self, img_name, c_name):
         if not os.path.exists(
             os.path.join(self.save_dir, self.path_results_unpair, self.path_results_out)
