@@ -9,7 +9,8 @@ from models.request import convert_multis_image
 import traceback
 from PIL import Image
 from io import BytesIO
-from services.clothesviton import reference
+from services.clothesviton.reference import TryonService
+tryon_service = TryonService()
 router = APIRouter()
 
 # VITON CLOTHES
@@ -35,6 +36,6 @@ def body_background(image: dict = Depends(convert_multis_image)):
     image2.save(img_path2)
     print("Image saved 2")
     
-    a =  reference.reference([image_name1],[image_name2])
+    a =  tryon_service.reference([image_name1],[image_name2])
     return ResponeModel(image=a)
 
