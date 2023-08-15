@@ -8,3 +8,7 @@ services:
     container_name: aip490-be
     ports:
       - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 12G 
