@@ -8,4 +8,4 @@ RUN pip install poetry && poetry config virtualenvs.create false && poetry insta
 
 COPY . /app/
 
-CMD ["python", "manage.py"]
+CMD ["poetry", "run", "python", "manage.py"]
